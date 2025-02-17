@@ -1,0 +1,137 @@
+﻿<Window x:Class="CarWorkshopWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Warsztat Samochodowy" Height="600" Width="800" Background="#F5F5F5">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        
+        <TextBlock Text="Warsztat Samochodowy"
+                   FontSize="24" FontWeight="Bold"
+                   Foreground="#333" HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        
+        <Border Grid.Row="1" Background="White" CornerRadius="10" Padding="10" Margin="0,0,0,10" BorderBrush="#CCC" BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="Zarządzanie Klientami" FontSize="18" FontWeight="Bold" Foreground="#0078D7" Margin="0,0,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <StackPanel Margin="0,0,10,0">
+                        <TextBlock Text="Imię i Nazwisko:"/>
+                        <TextBox Text="{Binding CustomerVM.NewCustomerName, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Numer Telefonu:"/>
+                        <TextBox Text="{Binding CustomerVM.NewCustomerPhone, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Dodaj Klienta"
+                            Command="{Binding CustomerVM.AddCustomerCommand}"
+                            Width="150" Height="30"
+                            Background="#0078D7" Foreground="White" FontWeight="Bold"
+                            Margin="0,10,10,10"/>
+
+                    <Button Content="Edytuj Klienta"
+                            Command="{Binding CustomerVM.EditCustomerCommand}"
+                            Width="150" Height="30"
+                            Background="Orange" Foreground="White" FontWeight="Bold"
+                            Margin="0,10,10,10"/>
+
+                    <Button Content="Usuń Klienta"
+                            Command="{Binding CustomerVM.RemoveCustomerCommand}"
+                            Width="150" Height="30"
+                            Background="Red" Foreground="White" FontWeight="Bold"
+                            Margin="0,10,0,10"/>
+                </StackPanel>
+
+                
+                <ListBox ItemsSource="{Binding CustomerVM.Customers}"
+                         DisplayMemberPath="Name"
+                         SelectedItem="{Binding CustomerVM.SelectedCustomer, Mode=TwoWay}"
+                         Height="100" Background="White"/>
+            </StackPanel>
+        </Border>
+
+        
+        <Border Grid.Row="2" Background="White" CornerRadius="10" Padding="10" Margin="0,0,0,10" BorderBrush="#CCC" BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="Zarządzanie Samochodami" FontSize="18" FontWeight="Bold" Foreground="#0078D7" Margin="0,0,0,10"/>
+
+                
+                <TextBlock Text="Samochody klienta:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding CustomerVM.SelectedCustomer.Name}" FontSize="14" Foreground="#333" Margin="0,0,0,5"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <StackPanel Margin="0,0,10,0">
+                        <TextBlock Text="Numer Rejestracyjny:"/>
+                        <TextBox Text="{Binding CarVM.NewCarLicensePlate, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,10,0">
+                        <TextBlock Text="Marka:"/>
+                        <TextBox Text="{Binding CarVM.NewCarMake, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Model:"/>
+                        <TextBox Text="{Binding CarVM.NewCarModel, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Dodaj Samochód"
+                            Command="{Binding CarVM.AddCarCommand}"
+                            Width="150" Height="30"
+                            Background="#0078D7" Foreground="White" FontWeight="Bold"
+                            Margin="0,10,10,10"/>
+
+                    <Button Content="Edytuj Samochód"
+                            Command="{Binding CarVM.EditCarCommand}"
+                            Width="150" Height="30"
+                            Background="Orange" Foreground="White" FontWeight="Bold"
+                            Margin="0,10,10,10"/>
+
+                    <Button Content="Usuń Samochód"
+                            Command="{Binding CarVM.RemoveCarCommand}"
+                            Width="150" Height="30"
+                            Background="Red" Foreground="White" FontWeight="Bold"
+                            Margin="0,10,0,10"/>
+                </StackPanel>
+
+                
+                <ListBox ItemsSource="{Binding CustomerVM.SelectedCustomerCars}"
+                         SelectedItem="{Binding CarVM.SelectedCar, Mode=TwoWay}"
+                         Height="120" Background="White">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding LicensePlate}" FontWeight="Bold" Width="100"/>
+                                <TextBlock Text="{Binding Make}" Width="100"/>
+                                <TextBlock Text="{Binding Model}" Width="100"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
